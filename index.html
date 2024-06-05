@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Input the values for the model to make a prediction</title>
+    <title>ML Prediction Web App</title>
 </head>
 <body>
-    <h1>ML Prediction Web App</h1>
-    <label>Ixxnput 1:</label>
-    <input type="text" id="inpxx ut1"><br><br>
+    <h1>Input the values below for the model to make a prediction</h1>
+    <label>Input 1:</label>
+    <input type="text" id="input1"><br><br>
     <label>Input 2:</label>
     <input type="text" id="input2"><br><br>
     <label>Input 3:</label>
@@ -18,8 +18,7 @@
 
     <script>
         function predict() {
-            var input1 = document.getElementById("inpxx ut1").value;
-            var input1 = document.getElementById("inpxx ut1").value;
+            var input1 = document.getElementById("input1").value;
             var input2 = document.getElementById("input2").value;
             var input3 = document.getElementById("input3").value;
             var input4 = document.getElementById("input4").value;
@@ -38,7 +37,7 @@
                 console.log('Response:', data); // Log the entire response for debugging
                 if (data.body) {
                     let parsedBody = JSON.parse(data.body);
-                    document.getElementById("prediction").innerText = "Prediction: " + parsedBody.prediction[0];
+                    document.getElementById("prediction").innerText = "Congratulation: Your prediction is " + parsedBody.prediction[0];
                 } else {
                     console.error('No body in response:', data);
                 }
