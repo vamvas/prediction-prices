@@ -1,9 +1,42 @@
-<html xmlns="http://www.w3.org/1999/xhtml" >
+<!DOCTYPE html>
+<html>
 <head>
-    <title>My Website Home Page</title>
+    <title>ML Prediction Web App</title>
 </head>
 <body>
-  <h1>Welcome to my website</h1>
-  <p>Now hosted on Amazon S3!</p>
+    <h1>ML Prediction Web App</h1>
+    <label>Input 1:</label>
+    <input type="text" id="input1"><br><br>
+    <label>Input 2:</label>
+    <input type="text" id="input2"><br><br>
+    <label>Input 3:</label>
+    <input type="text" id="input3"><br><br>
+    <label>Input 4:</label>
+    <input type="text" id="input4"><br><br>
+    <button onclick="predict()">Predict</button>
+    <div id="prediction"></div>
+
+    <script>
+        function predict() {
+            var input1 = document.getElementById("input1").value;
+            var input2 = document.getElementById("input2").value;
+            var input3 = document.getElementById("input3").value;
+            var input4 = document.getElementById("input4").value;
+            var data = {
+                "input": [parseFloat(input1), parseFloat(input2), parseFloat(input3), parseFloat(input4)]
+            };
+            fetch('https://r06h27gkje.execute-api.eu-west-2.amazonaws.com/prod', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("prediction").innerText = "Prediction: " + data.prediction[0];
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>
