@@ -34,10 +34,13 @@
             })
             .then(response => response.json())
             .then(data => {
-                // Parse the JSON string in the 'body' property
-                let parsedBody = JSON.parse(data.body);
-                // Access the prediction array from the parsed body
-                document.getElementById("prediction").innerText = "Prediction: " + parsedBody.prediction[0];
+                console.log('Response:', data); // Log the entire response for debugging
+                if (data.body) {
+                    let parsedBody = JSON.parse(data.body);
+                    document.getElementById("prediction").innerText = "Prediction: " + parsedBody.prediction[0];
+                } else {
+                    console.error('No body in response:', data);
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
