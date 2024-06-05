@@ -14,7 +14,7 @@
     <label>Input 4:</label>
     <input type="text" id="input4"><br><br>
     <button onclick="predict()">Predict</button>
-    <div id="prediction"></div>
+    <div id="prediction"></div> <!-- Updated ID here -->
 
     <script>
         function predict() {
@@ -27,11 +27,17 @@
             };
             fetch('https://r06h27gkje.execute-api.eu-west-2.amazonaws.com/prod', {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(data)
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById("prediction").innerText = "Prediction: " + data.prediction[0];
+                // Parse the JSON string in the 'body' property
+                let parsedBody = JSON.parse(data.body);
+                // Access the prediction array from the parsed body
+                document.getElementById("prediction").innerText = "Prediction: " + parsedBody.prediction[0];
             })
             .catch(error => {
                 console.error('Error:', error);
